@@ -1,5 +1,5 @@
 #' @title Request predictions from NFL Win Predictor API
-#' @description Returns numeric year of the NFL season for a given date
+#' @description Retrieve NFL game predictions for a given year and week
 #' @param year character or numeric year of season to get predictions for
 #' @param week numeric value for the week of the season to predict
 #' @param base_url character string defining the base API endpoint URL. Default is predict-new-data endpoint
@@ -8,7 +8,7 @@
 #' @importFrom magrittr `%>%`
 #' @return tibble with a row for each matchup between teams for the desired week. There is basic identifying information on each game and three columns representing the model predicted outcomes: .pred_class, .pred_1, .pred_0. .pred_class gives a 1 if the home team is predicted to win, and a 0 if the home team is predicted to lose. The .pred_1 and .pred_0 columns indicate the probability of either class occurring.
 #' @examples
-#' # Some coordinates at UC Santa Barbara
+#' # Predict week 8 of the 2021 NFL season
 #' predict_games(year = 2021, week = 8)
 #' @export
 predict_games <- function(
