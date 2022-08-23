@@ -2,6 +2,7 @@
 #' @description returns week of the NFL season by a date, if no date is entered, default is to return the current week of the season.
 #' @param date character date, YYYY-MM-DD. Default is NULL and date will set to the date the function was run
 #' @importFrom magrittr `%>%`
+#' @importFrom lubridate ymd
 #' @importFrom rvest read_html html_nodes html_table
 #' @importFrom janitor clean_names
 #' @importFrom dplyr mutate case_when select summarise group_by ungroup arrange n lag filter
@@ -14,6 +15,14 @@ get_week <- function(date = NULL) {
 
     date <- Sys.Date()
 
+  }
+
+  # check that date is in correct format
+  check_date <- lubridate::ymd(date, quiet = TRUE)
+
+  # error check
+  if(is.na(check_date)) {
+    stop("Incorrect date format, date must be in YYYY-MM-DD format")
   }
 
   # Current year

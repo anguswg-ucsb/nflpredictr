@@ -40,11 +40,12 @@ predict_games <- function(
     httr::POST() %>%
     httr::content(as = "parsed")
 
+  # if an error is returned from the API
   if (any(grepl("Internal server error", win_api) == TRUE)) {
 
-    stop(paste0("\nPotentially invalid inputs (i.e. year > current season, week > upcoming week):\nyear = ", year,
-                "\nweek = ", week))
-    return(NULL)
+    stop(
+      paste0("\nInvalid inputs:\nyear = ", year, "\nweek = ", week)
+         )
   }
 
   # convert parsed list to tibble, arrange by highest probability of winning

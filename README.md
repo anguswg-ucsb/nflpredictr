@@ -35,7 +35,7 @@ You can install the development version of `nflpredictr` from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("anguswg-ucsb/nflpredictr")
+# devtools::install_github("anguswg-ucsb/nflpredictr")
 ```
 
 ## Example
@@ -46,12 +46,13 @@ inputs are given to `predict_games()`, the default behavior is to make a
 prediction for the upcoming week of the current NFL season
 
 ``` r
-
 # Make an API request using predict_games() for the upcoming week of the current season specific year and week
 # nflpredictr::predict_games()
 ```
 
-## Past predictions
+<br>
+
+## Make predictions on past games
 
 Predictions can also be requested for past weeks, going back to the 2016
 season

@@ -7,13 +7,11 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  warning = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%",
+  out.width = "40%",
   eval = TRUE
 )
-
 ```
 
 # nflpredictr <img src="man/figures/logo.png" align="right" width="25%" />
@@ -42,24 +40,25 @@ The goal of `nflpredictr` is to access the [NFL Win Predictor API](http://68.183
 
 You can install the development version of `nflpredictr` from [GitHub](https://github.com/) with:
 
-``` r
+```{r}
 # install.packages("devtools")
-devtools::install_github("anguswg-ucsb/nflpredictr")
+# devtools::install_github("anguswg-ucsb/nflpredictr")
 ```
 
 ## Example
 
 `nflpredictr` provides utility functions for accessing predictions from the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/)
 If no inputs are given to `predict_games()`, the default behavior is to make a prediction for the upcoming week of the current NFL season
-```{r example, cache=TRUE}
-
+```{r example}
 # Make an API request using predict_games() for the upcoming week of the current season specific year and week
 # nflpredictr::predict_games()
 ```
 
-## Past predictions
+<br>
+
+## Make predictions on past games
 Predictions can also be requested for past weeks, going back to the 2016 season
-```{r past_predictions, cache=TRUE}
+```{r past_predictions}
 # Make an API request using predict_games() for a specific year and week
 # nflpredictr::predict_games(
 #   year = 2017,
