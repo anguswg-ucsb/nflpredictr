@@ -1,12 +1,21 @@
 Package: nflpredictr
-Title: What the Package Does (One Line, Title Case)
+Title: Access NFL Win Prediction API
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Angus", "Watters", , "anguswatters@gmail.com", role = c("aut", "cre"))
+Description: Conveniance functions for accessing and manipulating NFL game predictions from the NFL Win Predictions API. Coming soon will be functions for pulling data on Las Vegas betting lines.
+BugReports: https://github.com/anguswg-ucsb/nflpredictr/issues
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Imports:
+    magrittr,
+    dplyr,
+    rvest,
+    janitor,
+    stats,
+    httr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
