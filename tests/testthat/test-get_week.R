@@ -16,9 +16,4 @@ test_that("get_week errors...", {
     "Incorrect date format, date must be in YYYY-MM-DD format"
   )
 
-  expect_error(
-    get_week(date = "NULL"),
-    "Incorrect date format, date must be in YYYY-MM-DD format"
-  )
-
 })

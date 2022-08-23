@@ -6,7 +6,10 @@
 #' @importFrom httr POST content
 #' @importFrom dplyr tibble arrange
 #' @importFrom magrittr `%>%`
-#' @return numeric indicating the season year
+#' @return tibble with a row for each matchup between teams for the desired week. There is basic identifying information on each game and three columns representing the model predicted outcomes: .pred_class, .pred_1, .pred_0. .pred_class gives a 1 if the home team is predicted to win, and a 0 if the home team is predicted to lose. The .pred_1 and .pred_0 columns indicate the probability of either class occurring.
+#' @examples
+#' # Some coordinates at UC Santa Barbara
+#' predict_games(year = 2021, week = 8)
 #' @export
 predict_games <- function(
     year = NULL,

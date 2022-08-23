@@ -33,8 +33,8 @@ test_that("pred0ict_games errors...", {
   )
 
   expect_error(
-    predict_games(year = NULL, week = NULL, base_url = NULL),
-    paste0("Could not resolve host: year=2022&pred_week=1")
+    predict_games(year = "20420", week = NULL, base_url = "mndfg"),
+    paste0("Could not resolve host: mndfgyear=20420&pred_week=1")
   )
 
   expect_error(
@@ -47,3 +47,4 @@ test_that("pred0ict_games errors...", {
     paste0("Could not resolve host: NAyear=2021&pred_week=3")
   )
 })
+
