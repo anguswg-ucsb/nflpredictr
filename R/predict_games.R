@@ -61,4 +61,3 @@ predict_games <- function(
   return(win_api)
 
 }
-
