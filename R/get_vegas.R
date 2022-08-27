@@ -1,14 +1,14 @@
 #' @title Scrape internet for Vegas Odds for current NFL season
-#' @description Returns a dataframe with NFL odds for either the current week of the NFL season, or all avaliable weeks.
-#' @param current_week logical, whether to return all available odds or just the current weeks odds. Default is TRUE, returns just the current week odds
+#' @description Returns a dataframe with NFL odds for either the current week of the NFL season, or all available weeks.
+#' @param all_weeks logical, whether to return all available odds or just the current weeks odds. Default is TRUE, returns just the current week odds
 #' @return tibble with a row for each game with the odds columns from the perspective of the home team (spread, win, over under total)
 #' @importFrom magrittr `%>%`
 #' @importFrom rvest read_html html_nodes html_table
 #' @importFrom janitor clean_names
 #' @importFrom dplyr mutate case_when select summarise group_by ungroup arrange n lag filter
-#' @importFrom stats setNames
+#' @importFrom stats setNames na.omit
 #' @export
-get_vegas <- function(current_week = TRUE) {
+get_vegas <- function(all_weeks = FALSE) {
 
   # url to NFl odds tables
   vegas_url <- "https://vegas-odds.com/nfl/odds/"
@@ -25,18 +25,23 @@ get_vegas <- function(current_week = TRUE) {
   current_week  <- get_week()
 
   # dates associated with weeks of NFL season
-  max_week_date <- get_week_dates() %>%
+  week_dates <- get_week_dates()
+
+  # current week date
+  max_week_date <-
+    week_dates %>%
     dplyr::filter(week == current_week)
 
   # empty list to add odds tables to
   odds_lst <- list()
 
+  # loop through each table containing the odds for each game
   for (i in 1:length(vegas_tbls)) {
 
     odds_tbl <-
       vegas_tbls[[i]] %>%
       rvest::html_table(header = T) %>%
-      na.omit() %>%
+      stats::na.omit() %>%
       janitor::clean_names() %>%
       dplyr::mutate(across(where(is.numeric), as.character))
 
@@ -97,24 +102,57 @@ get_vegas <- function(current_week = TRUE) {
       ) %>%
       dplyr::relocate(date, home_team, away_team, favored)
 
+    # date of the game from website
+    odds_date <- vegas_odds$date[1]
+
+    # match dates of games with week of season
+    match_dates <-
+      week_dates %>%
+      dplyr::mutate(
+        date        = odds_date,
+        check_week  = dplyr::case_when(
+          date >= week_start & date <= week_end ~ TRUE,
+          TRUE                                    ~ FALSE
+        )
+      ) %>%
+      dplyr::filter(check_week == TRUE) %>%
+      dplyr::select(season, week, date)
+
+    # add season, week, and game_id columns
+    vegas_odds <-
+      vegas_odds %>%
+      dplyr::left_join(
+        match_dates,
+        by = "date"
+      ) %>%
+      dplyr::mutate(
+        game_id = dplyr::case_when(
+          week < 10  ~ paste0(season, "_0", week, "_", away_team, "_", home_team),
+          week >= 10 ~ paste0(season, "_", week, "_", away_team, "_", home_team)
+          )
+      ) %>%
+      dplyr::relocate(season, week, game_id, date)
+
     # add vegas odds dataframe to list of odds tables
     odds_lst[[i]] <- vegas_odds
+
   }
 
   # bind rows
   odds_df <- dplyr::bind_rows(odds_lst)
 
-  # if all avaliable odds is desired, set current_week to FALSE. Default is to return current week of odds (TRUE)
-  if(current_week == TRUE) {
-
-    # filter to current week
-    odds_df <-
-      odds_df %>%
-      dplyr::filter(date >= max_week_date$week_start, date <= max_week_date$week_end)
+  # if all available odds is desired, set all_weeks to FALSE. Default is to return current week of odds (FALSE)
+  if(all_weeks == TRUE) {
 
     return(odds_df)
 
+  # Defaults to current week of games odds
   } else {
+
+    # filter to just current week
+    odds_df <-
+      odds_df %>%
+      dplyr::filter(week == current_week) # dplyr::filter(date >= max_week_date$week_start, date <= max_week_date$week_end)
 
     return(odds_df)
 

@@ -115,3 +115,20 @@ nflpredictr::predict_games(
 #> 12   2017     8 2017_08_PIT_DET DET       PIT       0             0.394   0.606
 #> 13   2017     8 2017_08_MIN_CLE CLE       MIN       0             0.224   0.776
 ```
+
+## Plot the teams favored to win that week
+
+`nflpredictr` contains a few functions for quick plotting the outputs
+from `predict_games()`. The `plot_favored()` function will plot the
+teams favored by the NFL Win Prediction API model in order of win
+probability.
+
+``` r
+# Plot the outputs from predict_games()
+# nflpredictr::plot_favored(
+#   predictions = nflpredictr::predict_games(
+#     year = 2022,
+#     week = 1
+#   )
+#   )
+```
