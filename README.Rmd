@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "40%",
   eval = TRUE
 )
+
 ```
 
 # nflpredictr <img src="man/figures/logo.png" align="right" width="25%" />
@@ -74,12 +75,15 @@ nflpredictr::predict_games(
 
 ## Plot the teams favored to win that week
 `nflpredictr` contains a few functions for quick plotting the outputs from `predict_games()`. The `plot_favored()` function will plot the teams favored by the NFL Win Prediction API model in order of win probability.
-```{r plot_fav}
+```{r plot_fav, eval=FALSE}
 # Plot the outputs from predict_games()
-# nflpredictr::plot_favored(
-#   predictions = nflpredictr::predict_games(
-#     year = 2022,
-#     week = 1
-#   )
-#   )
+fav_plot <- nflpredictr::plot_favored(
+  predictions = nflpredictr::predict_games(
+    year = 2022,
+    week = 1
+  ),
+  prob_alpha  = FALSE
+  )
 ```
+
+<img src="man/figures/plot_fav.png" align="center" height = "100%" width="100%" />

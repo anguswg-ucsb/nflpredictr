@@ -1,51 +1,49 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
 
 # nflpredictr <img src="man/figures/logo.png" align="right" width="25%" />
 
 <!-- badges: start -->
-
 [![Dependencies](https://img.shields.io/badge/dependencies-7/26-orange?style=flat)](#)
-[![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
 <div align="left">
 
-<p align="left">
-<a href="http://68.183.25.9:8000/__docs__/"><strong>« API »</strong></a>
-<br /> <a href="https://anguswg-ucsb.github.io/nfl_wins/">Model
-Details</a>
-</p>
-
+  <p align="left">
+    <a href="http://68.183.25.9:8000/__docs__/"><strong>« API »</strong></a>
+    <br />
+    <a href="https://anguswg-ucsb.github.io/nfl_wins/">Model Details</a>
+  </p>
 </div>
 
 <hr>
 
-The goal of `nflpredictr` is to access the [NFL Win Predictor
-API](http://68.183.25.9:8000/__docs__/) to predictions on past and
-upcoming NFL games.
+The goal of `nflpredictr` is to access the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/) to predictions on past and upcoming NFL games.
 
 <hr>
 
 ## Installation
 
-You can install the development version of `nflpredictr` from
-[GitHub](https://github.com/) with:
+You can install the development version of `nflpredictr` from [GitHub](https://github.com/) with:
 
-``` r
+
+```r
 # install.packages("devtools")
 devtools::install_github("anguswg-ucsb/nflpredictr")
 ```
 
 ## Example
 
-`nflpredictr` provides utility functions for accessing predictions from
-the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/) If no
-inputs are given to `predict_games()`, the default behavior is to make a
-prediction for the upcoming week of the current NFL season
+`nflpredictr` provides utility functions for accessing predictions from the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/)
+If no inputs are given to `predict_games()`, the default behavior is to make a prediction for the upcoming week of the current NFL season
 
-``` r
+```r
 # Load package
 library(nflpredictr)
 
@@ -59,7 +57,7 @@ nflpredictr::predict_games(
 #> Sending request to nflwinpredictor API...
 #> Request URL:
 #> http://68.183.25.9:8000/predict-new-data?year=2022&pred_week=1
-#> # A tibble: 16 × 8
+#> # A tibble: 16 x 8
 #>    season  week game_id         home_team away_team .pred_class .pred_1 .pred_0
 #>     <int> <int> <chr>           <chr>     <chr>     <chr>         <dbl>   <dbl>
 #>  1   2022     1 2022_01_NYG_TEN TEN       NYG       1             0.777   0.223
@@ -83,11 +81,9 @@ nflpredictr::predict_games(
 <br>
 
 ## Make predictions on past games
+Predictions can also be requested for past weeks, going back to the 2016 season
 
-Predictions can also be requested for past weeks, going back to the 2016
-season
-
-``` r
+```r
 # Make an API request using predict_games() for a specific year and week
 nflpredictr::predict_games(
   year = 2017,
@@ -98,7 +94,7 @@ nflpredictr::predict_games(
 #> Sending request to nflwinpredictor API...
 #> Request URL:
 #> http://68.183.25.9:8000/predict-new-data?year=2017&pred_week=8
-#> # A tibble: 13 × 8
+#> # A tibble: 13 x 8
 #>    season  week game_id         home_team away_team .pred_class .pred_1 .pred_0
 #>     <int> <int> <chr>           <chr>     <chr>     <chr>         <dbl>   <dbl>
 #>  1   2017     8 2017_08_SF_PHI  PHI       SF        1             0.842   0.158
@@ -117,18 +113,17 @@ nflpredictr::predict_games(
 ```
 
 ## Plot the teams favored to win that week
+`nflpredictr` contains a few functions for quick plotting the outputs from `predict_games()`. The `plot_favored()` function will plot the teams favored by the NFL Win Prediction API model in order of win probability.
 
-`nflpredictr` contains a few functions for quick plotting the outputs
-from `predict_games()`. The `plot_favored()` function will plot the
-teams favored by the NFL Win Prediction API model in order of win
-probability.
-
-``` r
+```r
 # Plot the outputs from predict_games()
-# nflpredictr::plot_favored(
-#   predictions = nflpredictr::predict_games(
-#     year = 2022,
-#     week = 1
-#   )
-#   )
+fav_plot <- nflpredictr::plot_favored(
+  predictions = nflpredictr::predict_games(
+    year = 2022,
+    week = 1
+  ),
+  prob_alpha  = FALSE
+  )
 ```
+
+<img src="man/figures/plot_fav.png" align="center" height = "100%" width="100%" />
