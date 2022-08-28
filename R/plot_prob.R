@@ -6,6 +6,7 @@
 #' @param prob_alpha Whether the lollipop or bars on plot should be more/less transparent based on the model class probability. Default is TRUE, alpha is used on plot elements
 #' @importFrom dplyr mutate case_when
 #' @importFrom ggplot2 ggplot geom_col aes scale_fill_manual scale_x_continuous labs theme_bw theme element_text guides element_blank scale_color_manual
+#' @importFrom scales percent
 #' @return ggplot object with team matchups on the y axis and probabilities of the correct prediction on the x axis
 #' @export
 plot_prob <- function(
