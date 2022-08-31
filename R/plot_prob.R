@@ -103,8 +103,8 @@ plot_prob <- function(
           plot.subtitle    = ggplot2::element_text(size = 12, hjust = 0.5),
           axis.title       = ggplot2::element_text(face = "bold", size = 12),
           axis.text        = ggplot2::element_text(size = 10),
-          legend.text      = ggplot2::element_text(size = 12),
-          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 12),
+          legend.text      = ggplot2::element_text(size = 10),
+          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 10),
           axis.ticks       = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank()
         )
@@ -192,8 +192,8 @@ plot_prob <- function(
           plot.subtitle    = ggplot2::element_text(size = 12, hjust = 0.5),
           axis.title       = ggplot2::element_text(face = "bold", size = 12),
           axis.text        = ggplot2::element_text(size = 10),
-          legend.text      = ggplot2::element_text(size = 12),
-          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 12),
+          legend.text      = ggplot2::element_text(size = 10),
+          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 10),
           axis.ticks       = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank()
         )
@@ -283,8 +283,8 @@ plot_prob <- function(
           plot.subtitle    = ggplot2::element_text(size = 12, hjust = 0.5),
           axis.title       = ggplot2::element_text(face = "bold", size = 12),
           axis.text        = ggplot2::element_text(size = 10),
-          legend.text      = ggplot2::element_text(size = 12),
-          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 12),
+          legend.text      = ggplot2::element_text(size = 10),
+          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 10),
           axis.ticks       = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank()
         )
@@ -372,8 +372,8 @@ plot_prob <- function(
           plot.subtitle    = ggplot2::element_text(size = 12, hjust = 0.5),
           axis.title       = ggplot2::element_text(face = "bold", size = 12),
           axis.text        = ggplot2::element_text(size = 10),
-          legend.text      = ggplot2::element_text(size = 12),
-          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 12),
+          legend.text      = ggplot2::element_text(size = 10),
+          legend.title     = ggplot2::element_text(face = "bold", hjust = 0.5, size = 10),
           axis.ticks       = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank()
         )

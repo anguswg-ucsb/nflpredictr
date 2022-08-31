@@ -128,29 +128,6 @@ get_week_dates <- function(date = NULL) {
       dplyr::rename(week_start = min_date, week_end = max_date) %>%
       dplyr::filter(!grepl("Pre", week))
 
-    # start and end of each NFL week, extract current week
-    # week_dates <-
-    #   page_table %>%
-    #   dplyr::group_by(week, min_date, max_date) %>%
-    #   dplyr::summarise() %>%
-    #   dplyr::ungroup() %>%
-    #   dplyr::arrange(min_date) %>%
-    #   dplyr::mutate(
-    #     week = 1:n()
-    #   ) %>%
-    #   dplyr::mutate(
-    #     min_date      = as.Date(min_date),
-    #     max_date      = as.Date(max_date),
-    #     current_date  = date,
-    #     min_date      = dplyr::lag(max_date) + 1,
-    #     min_date      = dplyr::case_when(
-    #       is.na(min_date) ~ max_date - 1,
-    #       TRUE            ~ min_date
-    #     )
-    #   ) %>%
-    #   dplyr::rename(week_start = min_date, week_end = max_date) %>%
-    #   dplyr::filter(!grepl("Pre", week))
-
     # dates for week 1
     week_one <-
       week_dates %>%
@@ -167,7 +144,8 @@ get_week_dates <- function(date = NULL) {
       dplyr::mutate(week= as.numeric(week)) %>%
       dplyr::arrange(week) %>%
       dplyr::mutate(season = year) %>%
-      dplyr::relocate(season, week)
+      dplyr::relocate(season, week) %>%
+      dplyr::select(-day)
 
   } else {
 

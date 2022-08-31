@@ -3,7 +3,7 @@
 #' @return tibble of NFL teams and team abbreviations
 #' @importFrom dplyr tibble
 #' @export
-nfl_teams <- function() {
+get_nfl_teams <- function() {
   team_df <- dplyr::tibble(
     team_name = c("Arizona Cardinals", "Atlanta Falcons" , "Baltimore Ravens",  "Buffalo Bills",
                   "Carolina Panthers", "Chicago Bears",  "Cincinnati Bengals" ,"Cleveland Browns",

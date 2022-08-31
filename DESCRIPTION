@@ -13,12 +13,15 @@ Imports:
     magrittr,
     ggplot2,
     dplyr,
+    tidyr,
     rvest,
     janitor,
     stats,
     httr,
     lubridate, 
-    scales
+    scales,
+    RColorBrewer,
+    progress
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
