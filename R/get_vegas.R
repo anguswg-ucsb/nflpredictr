@@ -370,7 +370,7 @@ make_odds_table <- function(
 
   # match dates of games with week of season
   odds_week <-
-    week_dates %>%
+    date_table %>%
     dplyr::mutate(
       date        = odate,
       check_week  = dplyr::case_when(

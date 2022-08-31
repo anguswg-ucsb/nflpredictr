@@ -134,7 +134,7 @@ fav_plot <- nflpredictr::plot_favored(
 The `get_vegas()` function will retrieve Vegas spreads, money lines, and totals for the current season
 
 ```r
-# vegas_odds <- get_vegas()
+# vegas_odds <- nflpredictr::get_vegas()
 
 # vegas_odds
 ```
