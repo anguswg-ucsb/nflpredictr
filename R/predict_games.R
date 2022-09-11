@@ -56,7 +56,7 @@ predict_games <- function(
     win_api %>%
     dplyr::bind_rows() %>%
     dplyr::tibble() %>%
-    dplyr::arrange(-.pred_1)
+    dplyr::arrange(-home_win_prob )
 
   return(win_api)
 

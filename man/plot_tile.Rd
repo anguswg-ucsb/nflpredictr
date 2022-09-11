@@ -7,7 +7,7 @@
 plot_tile(predictions = NULL, favored_only = FALSE)
 }
 \arguments{
-\item{predictions}{dataframe with .pred_class, .pred_1, .pred_0 and home_team columns. Output from predict_games() function}
+\item{predictions}{dataframe with win, home_win_prob, away_win_prob and home_team columns. Output from predict_games() function}
 
 \item{favored_only}{logical. whether to only plot the favored teams win probabilities, or both team outcomes. Default is FALSE, to return win probability for both teams.}
 }

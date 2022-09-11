@@ -1,6 +1,6 @@
 #' Plot home and away win probabilities on a grid for a given week
 #' @description Takes the output predictions from predict_games() and plots the prediction probabilities for both teams for a given week.
-#' @param predictions dataframe with .pred_class, .pred_1, .pred_0 and home_team columns. Output from predict_games() function
+#' @param predictions dataframe with win, home_win_prob, away_win_prob and home_team columns. Output from predict_games() function
 #' @param favored_only logical. whether to only plot the favored teams win probabilities, or both team outcomes. Default is FALSE, to return win probability for both teams.
 #' @return ggplot object with matchups on the Y axis and the X axis split by home and away teams. Darker red colors indicate a lower win probability and dark green colors indicate a higher win probability.
 #' @importFrom dplyr mutate case_when
@@ -30,17 +30,17 @@ plot_tile <- function(
       predictions %>%
       dplyr::mutate(
         probability = dplyr::case_when(
-          .pred_class == "1" ~ .pred_1,
-          .pred_class == "0" ~ 1-(.pred_1)
+          win == "1" ~ home_win_prob,
+          win == "0" ~ 1-(home_win_prob)
         ),
         prob_pct    = paste0(100*round(probability, 6), " %"),
         fill        = dplyr::case_when(
-          .pred_class == "1" ~ "Home win",
-          .pred_class == "0" ~ "Home loss"
+          win == "1" ~ "Home win",
+          win == "0" ~ "Home loss"
         ),
         winning_team = dplyr::case_when(
-          .pred_class == "1" ~ home_team,
-          .pred_class == "0" ~ away_team
+          win == "1" ~ home_team,
+          win == "0" ~ away_team
         ),
         win_type = dplyr::case_when(
           winning_team == home_team ~ "Home",
@@ -101,15 +101,15 @@ plot_tile <- function(
       dplyr::mutate(
         clean_matchup = paste0(away_team, " @ ", home_team),
         winning_team = dplyr::case_when(
-          .pred_class == "1" ~ home_team,
-          .pred_class == "0" ~ away_team
+          win == "1" ~ home_team,
+          win == "0" ~ away_team
         )
       ) %>%
       tidyr::pivot_longer(cols = c(home_team, away_team)) %>%
       dplyr::mutate(
         probability = dplyr::case_when(
-          name == "home_team" ~ .pred_1,
-          name == "away_team" ~ .pred_0
+          name == "home_team" ~ home_win_prob,
+          name == "away_team" ~ away_win_prob
         ),
         name = dplyr::case_when(
           name == "home_team" ~ "Home team",

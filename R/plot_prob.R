@@ -1,6 +1,6 @@
 #' Plot Prediction Probability
 #' @description Takes the output predictions from predict_games() and plots the predicted outcomes for the home teams
-#' @param predictions dataframe with .pred_class, .pred_1, .pred_0 and home_team columns. Output from predict_games() function
+#' @param predictions dataframe with win, home_win_prob, away_win_prob and home_team columns. Output from predict_games() function
 #' @param bar_plot logical. If TRUE, a bar plot is generated. Default is FALSE and will return a lollipop plot
 #' @param pct_over_coinflip logical. If TRUE, probabilities are returned to represent how far over a 50-50 guess the prediction is. For example, a value of 0 on the plot x axis would mean that the home and away team have a 50% chance of winning the game.
 #' @param prob_alpha Whether the lollipop or bars on plot should be more/less transparent based on the model class probability. Default is TRUE, alpha is used on plot elements
@@ -31,16 +31,16 @@ plot_prob <- function(
         predictions %>%
         dplyr::mutate(
           probability = dplyr::case_when(
-            .pred_class == "1" ~ (.pred_1) - 0.5,
-            .pred_class == "0" ~ (.pred_0) - 0.5
+            win == "1" ~ (home_win_prob) - 0.5,
+            win == "0" ~ (away_win_prob) - 0.5
           ),
           fill        = dplyr::case_when(
-            .pred_class == "1" ~ "Home win",
-            .pred_class == "0" ~ "Home loss"
+            win == "1" ~ "Home win",
+            win == "0" ~ "Home loss"
           ),
           winning_team = dplyr::case_when(
-            .pred_class == "1" ~ home_team,
-            .pred_class == "0" ~ away_team
+            win == "1" ~ home_team,
+            win == "0" ~ away_team
           ),
           win_type = dplyr::case_when(
             winning_team == home_team ~ "Home win",
@@ -117,16 +117,16 @@ plot_prob <- function(
         predictions %>%
         dplyr::mutate(
           probability = dplyr::case_when(
-            .pred_class == "1" ~ (.pred_1) - 0.5,
-            .pred_class == "0" ~ (.pred_0) - 0.5
+            win == "1" ~ (home_win_prob) - 0.5,
+            win == "0" ~ (away_win_prob) - 0.5
           ),
           fill        = dplyr::case_when(
-            .pred_class == "1" ~ "Home win",
-            .pred_class == "0" ~ "Home loss"
+            win == "1" ~ "Home win",
+            win == "0" ~ "Home loss"
           ),
           winning_team = dplyr::case_when(
-            .pred_class == "1" ~ home_team,
-            .pred_class == "0" ~ away_team
+            win == "1" ~ home_team,
+            win == "0" ~ away_team
           ),
           win_type = dplyr::case_when(
             winning_team == home_team ~ "Home win",
@@ -211,16 +211,16 @@ plot_prob <- function(
         predictions %>%
         dplyr::mutate(
           probability = dplyr::case_when(
-            .pred_class == "1" ~ .pred_1,
-            .pred_class == "0" ~ .pred_0
+            win == "1" ~ home_win_prob,
+            win == "0" ~ away_win_prob
           ),
           fill        = dplyr::case_when(
-            .pred_class == "1" ~ "Home win",
-            .pred_class == "0" ~ "Home loss"
+            win == "1" ~ "Home win",
+            win == "0" ~ "Home loss"
           ),
           winning_team = dplyr::case_when(
-            .pred_class == "1" ~ home_team,
-            .pred_class == "0" ~ away_team
+            win == "1" ~ home_team,
+            win == "0" ~ away_team
           ),
           win_type = dplyr::case_when(
             winning_team == home_team ~ "Home win",
@@ -297,16 +297,16 @@ plot_prob <- function(
         predictions %>%
         dplyr::mutate(
           probability = dplyr::case_when(
-            .pred_class == "1" ~ .pred_1,
-            .pred_class == "0" ~ .pred_0
+            win == "1" ~ home_win_prob,
+            win == "0" ~ away_win_prob
           ),
           fill        = dplyr::case_when(
-            .pred_class == "1" ~ "Home win",
-            .pred_class == "0" ~ "Home loss"
+            win == "1" ~ "Home win",
+            win == "0" ~ "Home loss"
           ),
           winning_team = dplyr::case_when(
-            .pred_class == "1" ~ home_team,
-            .pred_class == "0" ~ away_team
+            win == "1" ~ home_team,
+            win == "0" ~ away_team
           ),
           win_type = dplyr::case_when(
             winning_team == home_team ~ "Home win",

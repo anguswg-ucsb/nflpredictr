@@ -12,7 +12,7 @@ plot_prob(
 )
 }
 \arguments{
-\item{predictions}{dataframe with .pred_class, .pred_1, .pred_0 and home_team columns. Output from predict_games() function}
+\item{predictions}{dataframe with win, home_win_prob, away_win_prob and home_team columns. Output from predict_games() function}
 
 \item{bar_plot}{logical. If TRUE, a bar plot is generated. Default is FALSE and will return a lollipop plot}
 
