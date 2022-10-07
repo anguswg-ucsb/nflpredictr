@@ -1,3 +1,6 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -21,7 +24,14 @@
 
 <hr>
 
-The goal of `nflpredictr` is to access the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/) to predictions on past and upcoming NFL games.
+The `nflpredictr` R package provides a lightweight R package that provides predictions for upcoming (and past) NFL games. 
+`nflpredictr` provides four main things:
+
+  1. Retrieves new data to use an inputs into a [ML model trained to predict the outcomes of NFL games](https://anguswg-ucsb.github.io/nfl_wins/)
+  2. Generate predictions using the new data
+  3. Visualize results.
+  4. Retrieve Las Vegas Odds and lines to compare with the predictions generated from `nflpredictr`
+
 
 <hr>
 
@@ -37,42 +47,18 @@ devtools::install_github("anguswg-ucsb/nflpredictr")
 
 ## Example
 
-`nflpredictr` provides utility functions for accessing predictions from the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/)
+`nflpredictr` provides utility functions for accessing game predictions from a Logistic Regression ML model that was trained on ~20 years of historic NFL data and [correctly predicts the outcomes of games ~69% of the time](https://anguswg-ucsb.github.io/nfl_wins/#Model_Performance_on_Test_Data).
 If no inputs are given to `predict_games()`, the default behavior is to make a prediction for the upcoming week of the current NFL season
 
 ```r
 # Load package
-library(nflpredictr)
+# library(nflpredictr)
 
 # Make an API request using predict_games()
-nflpredictr::predict_games(
-  year = 2022, 
-  week = 1
-  )
-#> 
-#> 
-#> Sending request to nflwinpredictor API...
-#> Request URL:
-#> http://68.183.25.9:8000/predict-new-data?year=2022&pred_week=1
-#> # A tibble: 16 × 8
-#>    season  week game_id         home_team away_team .pred_class .pred_1 .pred_0
-#>     <int> <int> <chr>           <chr>     <chr>     <chr>         <dbl>   <dbl>
-#>  1   2022     1 2022_01_NYG_TEN TEN       NYG       1             0.777   0.223
-#>  2   2022     1 2022_01_JAX_WAS WAS       JAX       1             0.740   0.260
-#>  3   2022     1 2022_01_DEN_SEA SEA       DEN       1             0.610   0.390
-#>  4   2022     1 2022_01_BUF_LA  LA        BUF       1             0.551   0.449
-#>  5   2022     1 2022_01_KC_ARI  ARI       KC        1             0.545   0.455
-#>  6   2022     1 2022_01_PIT_CIN CIN       PIT       1             0.532   0.468
-#>  7   2022     1 2022_01_GB_MIN  MIN       GB        0             0.433   0.567
-#>  8   2022     1 2022_01_LV_LAC  LAC       LV        0             0.420   0.580
-#>  9   2022     1 2022_01_TB_DAL  DAL       TB        0             0.408   0.592
-#> 10   2022     1 2022_01_NE_MIA  MIA       NE        0             0.383   0.617
-#> 11   2022     1 2022_01_BAL_NYJ NYJ       BAL       0             0.375   0.625
-#> 12   2022     1 2022_01_PHI_DET DET       PHI       0             0.328   0.672
-#> 13   2022     1 2022_01_NO_ATL  ATL       NO        0             0.308   0.692
-#> 14   2022     1 2022_01_IND_HOU HOU       IND       0             0.255   0.745
-#> 15   2022     1 2022_01_SF_CHI  CHI       SF        0             0.218   0.782
-#> 16   2022     1 2022_01_CLE_CAR CAR       CLE       0             0.185   0.815
+# nflpredictr::predict_games(
+#   year = 2022, 
+#   week = 1
+#   )
 ```
 
 <br>
@@ -82,31 +68,10 @@ Predictions can also be requested for past weeks, going back to the 2016 season
 
 ```r
 # Make an API request using predict_games() for a specific year and week
-nflpredictr::predict_games(
-  year = 2017,
-  week = 8
-  )
-#> 
-#> 
-#> Sending request to nflwinpredictor API...
-#> Request URL:
-#> http://68.183.25.9:8000/predict-new-data?year=2017&pred_week=8
-#> # A tibble: 13 × 8
-#>    season  week game_id         home_team away_team .pred_class .pred_1 .pred_0
-#>     <int> <int> <chr>           <chr>     <chr>     <chr>         <dbl>   <dbl>
-#>  1   2017     8 2017_08_SF_PHI  PHI       SF        1             0.842   0.158
-#>  2   2017     8 2017_08_LV_BUF  BUF       LV        1             0.680   0.320
-#>  3   2017     8 2017_08_LAC_NE  NE        LAC       1             0.654   0.346
-#>  4   2017     8 2017_08_DEN_KC  KC        DEN       1             0.629   0.371
-#>  5   2017     8 2017_08_CHI_NO  NO        CHI       1             0.598   0.402
-#>  6   2017     8 2017_08_CAR_TB  TB        CAR       1             0.572   0.428
-#>  7   2017     8 2017_08_HOU_SEA SEA       HOU       1             0.524   0.476
-#>  8   2017     8 2017_08_IND_CIN CIN       IND       1             0.511   0.489
-#>  9   2017     8 2017_08_DAL_WAS WAS       DAL       0             0.488   0.512
-#> 10   2017     8 2017_08_ATL_NYJ NYJ       ATL       0             0.437   0.563
-#> 11   2017     8 2017_08_MIA_BAL BAL       MIA       0             0.398   0.602
-#> 12   2017     8 2017_08_PIT_DET DET       PIT       0             0.394   0.606
-#> 13   2017     8 2017_08_MIN_CLE CLE       MIN       0             0.224   0.776
+# nflpredictr::predict_games(
+#   year = 2017,
+#   week = 8
+#   )
 ```
 
 ## Plot the teams favored to win that week
@@ -114,13 +79,13 @@ nflpredictr::predict_games(
 
 ```r
 # Plot the outputs from predict_games()
-fav_plot <- nflpredictr::plot_favored(
-  predictions = nflpredictr::predict_games(
-    year = 2022,
-    week = 1
-  ),
-  prob_alpha  = FALSE
-  )
+# fav_plot <- nflpredictr::plot_favored(
+#   predictions = nflpredictr::predict_games(
+#     year = 2022,
+#     week = 1
+#   ),
+#   prob_alpha  = FALSE
+#   )
 ```
 
 <img src="man/figures/plot_fav.png" align="center" height = "100%" width="100%" />
@@ -131,67 +96,7 @@ fav_plot <- nflpredictr::plot_favored(
 The `get_vegas()` function will retrieve Vegas spreads, money lines, and totals for the current season
 
 ```r
-vegas_odds <- nflpredictr::get_vegas()
-#> Retrieving Las Vegas betting odds...
-#> URL: https://vegas-odds.com/nfl/odds/
-#> Date input: 2022-08-31
-#> Retrieving dates of NFL weeks: 2022
-#> [===>---------------------------------------------------------------------] 5%
-#> [=====>-------------------------------------------------------------------] 8%
-#> [=======>-----------------------------------------------------------------] 11%
-#> [=========>---------------------------------------------------------------] 14%
-#> [===========>-------------------------------------------------------------] 16%
-#> [=============>-----------------------------------------------------------] 19%
-#> [===============>---------------------------------------------------------] 22%
-#> [=================>-------------------------------------------------------] 24%
-#> [===================>-----------------------------------------------------] 27%
-#> [=====================>---------------------------------------------------] 30%
-#> [=======================>-------------------------------------------------] 32%
-#> [=========================>-----------------------------------------------] 35%
-#> [===========================>---------------------------------------------] 38%
-#> [=============================>-------------------------------------------] 41%
-#> [===============================>-----------------------------------------] 43%
-#> [=================================>---------------------------------------] 46%
-#> [===================================>-------------------------------------] 49%
-#> [====================================>------------------------------------] 51%
-#> [======================================>----------------------------------] 54%
-#> [========================================>--------------------------------] 57%
-#> [==========================================>------------------------------] 59%
-#> [============================================>----------------------------] 62%
-#> [==============================================>--------------------------] 65%
-#> [================================================>------------------------] 68%
-#> [==================================================>----------------------] 70%
-#> [====================================================>--------------------] 73%
-#> [======================================================>------------------] 76%
-#> [========================================================>----------------] 78%
-#> [==========================================================>--------------] 81%
-#> [============================================================>------------] 84%
-#> [==============================================================>----------] 86%
-#> [================================================================>--------] 89%
-#> [==================================================================>------] 92%
-#> [====================================================================>----] 95%
-#> [======================================================================>--] 97%
-#> [=========================================================================] 100%
-
-vegas_odds
-#> # A tibble: 16 × 10
-#>    season  week game_id      date       home_…¹ away_…² favored spread   win total
-#>     <dbl> <dbl> <chr>        <date>     <chr>   <chr>     <dbl>  <dbl> <dbl> <dbl>
-#>  1   2022     1 2022_01_BUF… 2022-09-08 LA      BUF           0    2.5   120    52
-#>  2   2022     1 2022_01_CLE… 2022-09-11 CAR     CLE           1   -2    -140    41
-#>  3   2022     1 2022_01_IND… 2022-09-11 HOU     IND           0    8     290    44
-#>  4   2022     1 2022_01_JAX… 2022-09-11 WAS     JAX           1   -3    -160    44
-#>  5   2022     1 2022_01_NO_… 2022-09-11 ATL     NO            0    5.5   185    42
-#>  6   2022     1 2022_01_PHI… 2022-09-11 DET     PHI           0    4     170    48
-#>  7   2022     1 2022_01_SF_… 2022-09-11 CHI     SF            0    7     250    42
-#>  8   2022     1 2022_01_GB_… 2022-09-11 MIN     GB            0    2     110    48
-#>  9   2022     1 2022_01_KC_… 2022-09-11 ARI     KC            0    3     165    53
-#> 10   2022     1 2022_01_NYG… 2022-09-11 TEN     NYG           1   -5.5  -240    44
-#> 11   2022     1 2022_01_TB_… 2022-09-11 DAL     TB            0    1     105    50
-#> 12   2022     1 2022_01_NE_… 2022-09-11 MIA     NE            1   -2.5  -160    44
-#> 13   2022     1 2022_01_PIT… 2022-09-11 CIN     PIT           1   -6.5  -270    44
-#> 14   2022     1 2022_01_LV_… 2022-09-11 LAC     LV            1   -3    -175    52
-#> 15   2022     1 2022_01_DEN… 2022-09-12 SEA     DEN           0    5     210    42
-#> 16   2022     1 2022_01_BAL… 2022-09-11 NYJ     BAL           0    7     240    45
-#> # … with abbreviated variable names ¹​home_team, ²​away_team
+# vegas_odds <- nflpredictr::get_vegas()
+# 
+# vegas_odds
 ```

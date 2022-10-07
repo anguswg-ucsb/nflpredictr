@@ -47,10 +47,17 @@ get_week_dates <- function(date = NULL) {
   message(paste0("Retrieving dates of NFL weeks: ", year))
 
   # Construct URL
-  url  <- paste0("https://www.pro-football-reference.com/years/", year ,"/games.htm")
+  url  <- url(
+    paste0("https://www.pro-football-reference.com/years/", year ,"/games.htm"),
+    "rb"
+  )
 
   # Read HTML page using URL
   page <- rvest::read_html(url)
+
+  # close URL connection
+  close(url)
+  # closeAllConnections()
 
   # Extract HTML nodes for table
   page_nodes <-
@@ -158,7 +165,11 @@ get_week_dates <- function(date = NULL) {
           grepl("January|February|March", datex) ~ year + 1,
           TRUE                                   ~ year
         ),
-        date = as.Date(paste(datex, new_year), format='%b %d %Y')
+        date = as.Date(paste0(new_year, "-", substr(datex, 6, 10)))
+        # date = as.Date(paste(datex, new_year), format='%Y-%m-%d')
+        # date = gsub(sub('(-.*)\\-|-.*', '\\1', datex), new_year, datex)
+        # date = as.Date(paste(datex, new_year), format='%b %d %Y')
+        # date = as.Date(paste(datex, new_year), format='%b %d %Y')
       ) %>%
       dplyr::group_by(week) %>%
       dplyr::mutate(

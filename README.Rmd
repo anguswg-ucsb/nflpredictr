@@ -32,7 +32,14 @@ knitr::opts_chunk$set(
 
 <hr>
 
-The goal of `nflpredictr` is to access the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/) to predictions on past and upcoming NFL games.
+The `nflpredictr` R package provides a lightweight R package that provides predictions for upcoming (and past) NFL games. 
+`nflpredictr` provides four main things:
+
+  1. Retrieves new data to use an inputs into a [ML model trained to predict the outcomes of NFL games](https://anguswg-ucsb.github.io/nfl_wins/)
+  2. Generate predictions using the new data
+  3. Visualize results.
+  4. Retrieve Las Vegas Odds and lines to compare with the predictions generated from `nflpredictr`
+
 
 <hr>
 
@@ -47,17 +54,17 @@ devtools::install_github("anguswg-ucsb/nflpredictr")
 
 ## Example
 
-`nflpredictr` provides utility functions for accessing predictions from the [NFL Win Predictor API](http://68.183.25.9:8000/__docs__/)
+`nflpredictr` provides utility functions for accessing game predictions from a Logistic Regression ML model that was trained on ~20 years of historic NFL data and [correctly predicts the outcomes of games ~69% of the time](https://anguswg-ucsb.github.io/nfl_wins/#Model_Performance_on_Test_Data).
 If no inputs are given to `predict_games()`, the default behavior is to make a prediction for the upcoming week of the current NFL season
 ```{r example}
 # Load package
-library(nflpredictr)
+# library(nflpredictr)
 
 # Make an API request using predict_games()
-nflpredictr::predict_games(
-  year = 2022, 
-  week = 1
-  )
+# nflpredictr::predict_games(
+#   year = 2022, 
+#   week = 1
+#   )
 ```
 
 <br>
@@ -66,23 +73,23 @@ nflpredictr::predict_games(
 Predictions can also be requested for past weeks, going back to the 2016 season
 ```{r past_predictions}
 # Make an API request using predict_games() for a specific year and week
-nflpredictr::predict_games(
-  year = 2017,
-  week = 8
-  )
+# nflpredictr::predict_games(
+#   year = 2017,
+#   week = 8
+#   )
 ```
 
 ## Plot the teams favored to win that week
 `nflpredictr` contains a few functions for quick plotting the outputs from `predict_games()`. The `plot_favored()` function will plot the teams favored by the NFL Win Prediction API model in order of win probability.
 ```{r plot_fav, eval=FALSE}
 # Plot the outputs from predict_games()
-fav_plot <- nflpredictr::plot_favored(
-  predictions = nflpredictr::predict_games(
-    year = 2022,
-    week = 1
-  ),
-  prob_alpha  = FALSE
-  )
+# fav_plot <- nflpredictr::plot_favored(
+#   predictions = nflpredictr::predict_games(
+#     year = 2022,
+#     week = 1
+#   ),
+#   prob_alpha  = FALSE
+#   )
 ```
 
 <img src="man/figures/plot_fav.png" align="center" height = "100%" width="100%" />
@@ -92,7 +99,7 @@ fav_plot <- nflpredictr::plot_favored(
 ## Retrieve current Las Vegas betting odds 
 The `get_vegas()` function will retrieve Vegas spreads, money lines, and totals for the current season
 ```{r vegas_ex}
-vegas_odds <- nflpredictr::get_vegas()
-
-vegas_odds
+# vegas_odds <- nflpredictr::get_vegas()
+# 
+# vegas_odds
 ```

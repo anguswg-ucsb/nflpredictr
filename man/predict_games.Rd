@@ -2,20 +2,14 @@
 % Please edit documentation in R/predict_games.R
 \name{predict_games}
 \alias{predict_games}
-\title{Request predictions from NFL Win Predictor API}
+\title{Generate NFL win predictions for past and upcoming NFL games}
 \usage{
-predict_games(
-  year = NULL,
-  week = NULL,
-  base_url = "http://68.183.25.9:8000/predict-new-data?"
-)
+predict_games(year = NULL, week = NULL)
 }
 \arguments{
 \item{year}{character or numeric year of season to get predictions for}
 
 \item{week}{numeric value for the week of the season to predict}
-
-\item{base_url}{character string defining the base API endpoint URL. Default is predict-new-data endpoint}
 }
 \value{
 tibble with a row for each matchup between teams for the desired week. There is basic identifying information on each game and three columns representing the model predicted outcomes: .pred_class, .pred_1, .pred_0. .pred_class gives a 1 if the home team is predicted to win, and a 0 if the home team is predicted to lose. The .pred_1 and .pred_0 columns indicate the probability of either class occurring.

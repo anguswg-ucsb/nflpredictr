@@ -14,11 +14,21 @@ get_vegas <- function(
     ) {
 
   # URL to NFl odds tables
-  vegas_url <- "https://vegas-odds.com/nfl/odds/"
+  # vegas_url <- "https://vegas-odds.com/nfl/odds/"
+
+  # Construct URL
+  vegas_url  <- url(
+    paste0("https://vegas-odds.com/nfl/odds/"),
+    "rb"
+  )
 
   message(paste0("Retrieving Las Vegas betting odds...\nURL: ", vegas_url))
 
+  # Read HTML page using URL
   vegas_page <- rvest::read_html(vegas_url)
+
+  # close URL connection
+  close(vegas_url)
 
   # vegas odds table nodes
   vegas_tbls <-
@@ -38,7 +48,7 @@ get_vegas <- function(
 
   # empty list to add odds tables to
   odds_lst <- list()
-
+# rm(pb, i, odds_lst)
   # progress bar
   pb <- progress::progress_bar$new(total = length(vegas_tbls))
 
@@ -192,17 +202,23 @@ get_matchups <- function(
 
   }
 
- # regular season URL
- url <- paste0("https://www.cbssports.com/nfl/schedule/", year, "/regular/", week, "/")
+  # regular season URL
+  url  <- url(
+    paste0("https://www.cbssports.com/nfl/schedule/", year, "/regular/", week, "/"),
+    "rb"
+  )
 
- if(verbose == TRUE) {
+   if(verbose == TRUE) {
 
-   message(paste0("Retrieving matchups:\nSeason:", year, "\nWeek: ", week))
+     message(paste0("Retrieving matchups:\nSeason:", year, "\nWeek: ", week))
 
- }
+   }
 
   # Read HTML page using URL
   page <- rvest::read_html(url)
+
+  # close URL connection
+  close(url)
 
   # Extract HTML nodes for table
   page_nodes <-
