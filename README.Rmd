@@ -67,10 +67,9 @@ If no inputs are given to `predict_games()`, the default behavior is to make a p
 # Load package
 # library(nflpredictr)
 
-# Make an API request using predict_games()
+# Make an API request using predict_games(), default week is the upcoming week of the season
 # nflpredictr::predict_games(
-#   year = 2022, 
-#   week = 1
+#   year = 2022
 #   )
 ```
 

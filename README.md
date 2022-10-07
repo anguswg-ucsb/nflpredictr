@@ -60,10 +60,9 @@ make a prediction for the upcoming week of the current NFL season
 # Load package
 # library(nflpredictr)
 
-# Make an API request using predict_games()
+# Make an API request using predict_games(), default week is the upcoming week of the season
 # nflpredictr::predict_games(
-#   year = 2022, 
-#   week = 1
+#   year = 2022
 #   )
 ```
 

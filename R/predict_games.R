@@ -17,11 +17,6 @@ predict_games <- function(
     base_url = "http://68.183.25.9:8000/predict-new-data?"
     ) {
 
-  # stop if week 1, TODO, fix DO droplet API
-  if(week == 1) {
-    stop(paste0("Invalid 'week' argument\n'week' must be > 1"))
-  }
-
   # if no year is entered, default to current season
   if(is.null(year)) {
     year <- get_year()
@@ -30,6 +25,11 @@ predict_games <- function(
   # if no week is entered, default to current week
   if(is.null(week)) {
     week <- get_week()
+  }
+
+  # stop if week 1, TODO, fix DO droplet API
+  if(week == 1) {
+    stop(paste0("Invalid 'week' argument\n'week' must be > 1"))
   }
 
   # Construct API URL
