@@ -15,6 +15,7 @@ Imports:
     dplyr,
     tidyr,
     rvest,
+    httr,
     janitor,
     stats,
     lubridate, 
@@ -22,7 +23,6 @@ Imports:
     RColorBrewer,
     elo,
     stringr,
-    tune,
     progress
 Suggests: 
     testthat (>= 3.0.0)

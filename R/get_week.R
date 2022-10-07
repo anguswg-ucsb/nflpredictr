@@ -11,7 +11,7 @@
 get_week <- function(date = NULL) {
 
   # if no date is entered, set to date function is run
-  if(is.null(date) | is.na(date)) {
+  if(is.null(date)) {
 
     date <- Sys.Date()
 

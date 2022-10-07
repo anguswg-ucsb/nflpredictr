@@ -12,6 +12,13 @@ knitr::opts_chunk$set(
   out.width   = "40%",
   eval        = TRUE
 )
+# The `nflpredictr` R package provides a lightweight R package that provides predictions for upcoming (and past) NFL games. 
+# `nflpredictr` provides four main things:
+# 
+#   1. Retrieves new data to use an inputs into a [ML model trained to predict the outcomes of NFL games](https://anguswg-ucsb.github.io/nfl_wins/)
+#   2. Generate predictions using the new data
+#   3. Visualize results.
+#   4. Retrieve Las Vegas Odds and lines to compare with the predictions generated from `nflpredictr`
 ```
 
 # nflpredictr <img src="man/figures/logo.png" align="right" width="25%" />
