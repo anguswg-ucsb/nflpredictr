@@ -1,6 +1,6 @@
 Package: nflpredictr
 Title: Access NFL Win Prediction API
-Version: 0.0.0.9000
+Version: 0.0.1.0000
 Authors@R: 
     person("Angus", "Watters", , "anguswatters@gmail.com", role = c("aut", "cre"))
 Description: Conveniance functions for accessing and manipulating NFL game predictions from the NFL Win Predictions API. Coming soon will be functions for pulling data on Las Vegas betting lines.

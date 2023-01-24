@@ -2,7 +2,6 @@
 
 export(get_matchups)
 export(get_nfl_teams)
-export(get_vegas)
 export(get_week_dates)
 export(plot_favored)
 export(plot_tile)

@@ -17,20 +17,38 @@ predict_games <- function(
     base_url = "http://68.183.25.9:8000/predict-new-data?"
     ) {
 
-  # if no year is entered, default to current season
-  if(is.null(year)) {
-    year <- get_year()
+  # # if no year is entered, default to current season
+  # if(is.null(year)) {
+  #   year <- get_year()
+  # }
+
+  # if no week is entered, default to week 2
+  if(is.null(week)) {
+    # week <- get_week()
+    week <- 2
   }
 
-  # if no week is entered, default to current week
-  if(is.null(week)) {
-    week <- get_week()
+  # if year is after 2021, or no year is given, default to 2021
+  if(any(year > 2021, is.null(year))) {
+    year <- 2021
+    # stop(
+    #   paste0("\nInvalid 'year' argument:\nyear = ", year, "\nPlease provide a year before 2022")
+    # )
   }
+
+
 
   # stop if week 1, TODO, fix DO droplet API
   if(week == 1) {
     stop(paste0("Invalid 'week' argument\n'week' must be > 1"))
   }
+
+  # # if year is passed 2021, return error. FAILING TODO
+  # if(year > 2021) {
+  #   stop(
+  #     paste0("\nInvalid 'year' argument:\nyear = ", year, "\nPlease provide a year before 2022")
+  #   )
+  # }
 
   # Construct API URL
   url <- paste0(base_url, "year=", year, "&pred_week=", week)
@@ -38,7 +56,7 @@ predict_games <- function(
   # message to user
   message(paste0("\n\nSending request to nflwinpredictor API...\nRequest URL:\n", url))
 
-  # Post request to API and format responce into dataframe
+  # Post request to API and format response into dataframe
   win_api <-
     url %>%
     httr::POST() %>%

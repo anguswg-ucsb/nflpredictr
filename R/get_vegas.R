@@ -1,21 +1,18 @@
 #' @title Scrape internet for Vegas Odds for current NFL season
 #' @description Returns a dataframe with NFL odds for either the current week of the NFL season, or all available weeks.
 #' @param all_weeks logical, whether to return all available odds or just the current weeks odds. Default is TRUE, returns just the current week odds
-#' @return tibble with a row for each game with the odds columns from the perspective of the home team (spread, win, over under total)
 #' @importFrom magrittr `%>%`
 #' @importFrom rvest read_html html_nodes html_table
 #' @importFrom janitor clean_names
 #' @importFrom dplyr mutate case_when select summarise group_by ungroup arrange n filter relocate
 #' @importFrom stats setNames na.omit
 #' @importFrom progress progress_bar
-#' @export
+#' @noRd
+#' @keywords internal
+#' @return tibble with a row for each game with the odds columns from the perspective of the home team (spread, win, over under total)
 get_vegas <- function(
     all_weeks = FALSE
     ) {
-
-  # URL to NFl odds tables
-  # vegas_url <- "https://vegas-odds.com/nfl/odds/"
-
   # Construct URL
   vegas_url  <- url(
     paste0("https://vegas-odds.com/nfl/odds/"),
@@ -298,13 +295,15 @@ get_matchups <- function(
 
 #' @title Extract date from scraped vegas-lines.com page
 #' @param page_table xml_node containing a table entry with betting information for a matchup
-#' @return character string representing date of odds table
 #' @importFrom magrittr `%>%`
 #' @importFrom rvest html_table
 #' @importFrom janitor clean_names
 #' @importFrom dplyr mutate across
 #' @importFrom tidyr pivot_longer
 #' @importFrom stats na.omit
+#' @noRd
+#' @keywords internal
+#' @return character string representing date of odds table
 parse_table <- function(page_table) {
 
   odds_tbl <-
@@ -328,13 +327,15 @@ parse_table <- function(page_table) {
 #' @param page_table xml_node containing a table entry with betting information for a matchup
 #' @param date_table a dataframe detailing the starting and ending dates of each week of an NFL season, the output from get_week_dates() function. Default is NULL and current season date table will be pulled
 #' @param all_weeks logical, whether to return all weeks on vegas-odds.com page or only the current week. Default is FALSE, returns only the current week of odds.
-#' @return tibble with a tidied table with odds data
 #' @importFrom magrittr `%>%`
 #' @importFrom rvest html_table
 #' @importFrom janitor clean_names
 #' @importFrom dplyr mutate across case_when left_join select n filter relocate bind_cols
 #' @importFrom tidyr pivot_longer
 #' @importFrom stats na.omit
+#' @noRd
+#' @keywords internal
+#' @return tibble with a tidied table with odds data
 make_odds_table <- function(
     page_table = NULL,
     date_table = NULL,

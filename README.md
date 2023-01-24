@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nflpredictr <img src="man/figures/logo.png" align="right" width="25%" />
+# **nflpredictr** <img src="man/figures/logo.png" align="right" width="25%" />
 
 <!-- badges: start -->
 
@@ -22,24 +22,28 @@ Details</a>
 
 <hr>
 
-The `nflpredictr` R package provides a lightweight R client for
+The **`nflpredictr`** R package provides a lightweight R client for
 retrieving predictions for upcoming (and past) NFL games via the [NFL
 Win Predictor API](http://68.183.25.9:8000/__docs__/). Details on the
 model used to make the predictions can be found
 [here](https://anguswg-ucsb.github.io/nfl_wins/)
 
-`nflpredictr` provides four main functionalities: 1. Retrieves new data
-to use as the inputs into a [ML model trained to predict the outcomes of
-NFL games](https://anguswg-ucsb.github.io/nfl_wins/) 2. Provide the new
-data to the [API](http://68.183.25.9:8000/__docs__/) and return
-predictions 3. Visualize results. 4. Retrieve Las Vegas Odds and lines
-to compare with the predictions generated from `nflpredictr`
+**`nflpredictr`** provides four main functionalities:
+
+1.  Retrieves new data to use as the inputs into a [ML model trained to
+    predict the outcomes of NFL
+    games](https://anguswg-ucsb.github.io/nfl_wins/)
+2.  Provide the new data to the [API](http://68.183.25.9:8000/__docs__/)
+    and return predictions
+3.  Visualize results.
+4.  Retrieve Las Vegas Odds and lines to compare with the predictions
+    generated from **`nflpredictr`**
 
 <hr>
 
 ## Installation
 
-You can install the development version of `nflpredictr` from
+You can install the development version of **`nflpredictr`** from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -49,13 +53,13 @@ devtools::install_github("anguswg-ucsb/nflpredictr")
 
 ## Example
 
-`nflpredictr` provides utility functions for accessing game predictions
-from a Logistic Regression ML model that was trained on \~20 years of
-historic NFL data and [correctly predicts the outcomes of games \~69% of
-the
+**`nflpredictr`** provides utility functions for accessing game
+predictions from a Logistic Regression ML model that was trained on \~20
+years of historic NFL data and [correctly predicts the outcomes of games
+\~69% of the
 time](https://anguswg-ucsb.github.io/nfl_wins/#Model_Performance_on_Test_Data).
-If no inputs are given to `predict_games()`, the default behavior is to
-make a prediction for the upcoming week of the current NFL season
+If no inputs are given to **`predict_games()`**, the default behavior is
+to make a prediction for week 2 of the 2021 NFL season.
 
 ``` r
 # Load package
@@ -63,33 +67,33 @@ library(nflpredictr)
 
 # Make an API request using predict_games(), default week is the upcoming week of the season
 nflpredictr::predict_games(
-  year = 2022,
-  week = 5
-  )
+  year = 2021,
+  week = 2
+)
 #> 
 #> 
 #> Sending request to nflwinpredictor API...
 #> Request URL:
-#> http://68.183.25.9:8000/predict-new-data?year=2022&pred_week=5
+#> http://68.183.25.9:8000/predict-new-data?year=2021&pred_week=2
 #> # A tibble: 16 × 8
 #>    season  week game_id         home_team away_team win   home_win_prob away_w…¹
 #>     <int> <int> <chr>           <chr>     <chr>     <chr>         <dbl>    <dbl>
-#>  1   2022     5 2022_05_HOU_JAX JAX       HOU       1             0.724    0.276
-#>  2   2022     5 2022_05_PIT_BUF BUF       PIT       1             0.706    0.294
-#>  3   2022     5 2022_05_CHI_MIN MIN       CHI       1             0.661    0.339
-#>  4   2022     5 2022_05_LV_KC   KC        LV        1             0.637    0.363
-#>  5   2022     5 2022_05_NYG_GB  GB        NYG       1             0.591    0.409
-#>  6   2022     5 2022_05_MIA_NYJ NYJ       MIA       1             0.589    0.411
-#>  7   2022     5 2022_05_ATL_TB  TB        ATL       1             0.584    0.416
-#>  8   2022     5 2022_05_DET_NE  NE        DET       1             0.511    0.489
-#>  9   2022     5 2022_05_DAL_LA  LA        DAL       0             0.492    0.508
-#> 10   2022     5 2022_05_SF_CAR  CAR       SF        0             0.492    0.508
-#> 11   2022     5 2022_05_CIN_BAL BAL       CIN       0             0.491    0.509
-#> 12   2022     5 2022_05_IND_DEN DEN       IND       0             0.476    0.524
-#> 13   2022     5 2022_05_TEN_WAS WAS       TEN       0             0.475    0.525
-#> 14   2022     5 2022_05_LAC_CLE CLE       LAC       0             0.462    0.538
-#> 15   2022     5 2022_05_SEA_NO  NO        SEA       0             0.457    0.543
-#> 16   2022     5 2022_05_PHI_ARI ARI       PHI       0             0.372    0.628
+#>  1   2021     2 2021_02_SF_PHI  PHI       SF        1             0.699    0.301
+#>  2   2021     2 2021_02_TEN_SEA SEA       TEN       1             0.694    0.306
+#>  3   2021     2 2021_02_MIN_ARI ARI       MIN       1             0.692    0.308
+#>  4   2021     2 2021_02_ATL_TB  TB        ATL       1             0.644    0.356
+#>  5   2021     2 2021_02_LV_PIT  PIT       LV        1             0.618    0.382
+#>  6   2021     2 2021_02_DAL_LAC LAC       DAL       1             0.572    0.428
+#>  7   2021     2 2021_02_BUF_MIA MIA       BUF       1             0.544    0.456
+#>  8   2021     2 2021_02_KC_BAL  BAL       KC        1             0.540    0.460
+#>  9   2021     2 2021_02_HOU_CLE CLE       HOU       1             0.509    0.491
+#> 10   2021     2 2021_02_NYG_WAS WAS       NYG       0             0.498    0.502
+#> 11   2021     2 2021_02_NO_CAR  CAR       NO        0             0.471    0.529
+#> 12   2021     2 2021_02_NE_NYJ  NYJ       NE        0             0.449    0.551
+#> 13   2021     2 2021_02_CIN_CHI CHI       CIN       0             0.443    0.557
+#> 14   2021     2 2021_02_DEN_JAX JAX       DEN       0             0.417    0.583
+#> 15   2021     2 2021_02_LA_IND  IND       LA        0             0.413    0.587
+#> 16   2021     2 2021_02_DET_GB  GB        DET       0             0.312    0.688
 #> # … with abbreviated variable name ¹​away_win_prob
 ```
 
@@ -134,15 +138,15 @@ nflpredictr::predict_games(
 ## Make a tile plot of win probabilities
 
 `nflpredictr` contains a few functions for quick plotting the outputs
-from `predict_games()`. The `plot_tile()` function will plot each match
-up side by side on a tile plot and color code teams by their predicted
-win probability from the NFL Win Prediction API.
+from **`predict_games()`**. The **`plot_tile()`** function will plot
+each match up side by side on a tile plot and color code teams by their
+predicted win probability from the NFL Win Prediction API.
 
 ``` r
 # Plot the outputs from predict_games()
 tile_plot <- nflpredictr::plot_tile(
                   predictions = nflpredictr::predict_games(
-                    year = 2022,
+                    year = 2021,
                     week = 5
                   )
               )
@@ -161,7 +165,7 @@ Prediction API model in order of win probability.
 # Plot the outputs from predict_games()
 fav_plot <- nflpredictr::plot_favored(
                 predictions = nflpredictr::predict_games(
-                                  year = 2022,
+                                  year = 2021,
                                   week = 5
                                 ),
                 prob_alpha  = FALSE
@@ -171,37 +175,3 @@ fav_plot <- nflpredictr::plot_favored(
 <img src="man/figures/plot_fav.png" align="center" height = "100%" width="100%" />
 
 <br>
-
-## Retrieve current Las Vegas betting odds
-
-The `get_vegas()` function will retrieve Vegas spreads, money lines, and
-totals for the current season
-
-``` r
-vegas_odds <- nflpredictr::get_vegas()
-#> Retrieving Las Vegas betting odds...
-#> URL: 4
-#> Date input: 2022-10-07
-#> Retrieving dates of NFL weeks: 2022
-
-vegas_odds
-#> # A tibble: 15 × 10
-#>    season  week game_id    date       home_…¹ away_…² favored spread   win total
-#>     <dbl> <dbl> <chr>      <date>     <chr>   <chr>     <dbl>  <dbl> <dbl> <dbl>
-#>  1   2022     5 2022_05_N… 2022-10-09 GB      NYG           1   -9    -380    41
-#>  2   2022     5 2022_05_A… 2022-10-09 TB      ATL           1  -10    -480    46
-#>  3   2022     5 2022_05_C… 2022-10-09 MIN     CHI           1   -7.5  -360    44
-#>  4   2022     5 2022_05_D… 2022-10-09 NE      DET           1   -3    -170    46
-#>  5   2022     5 2022_05_H… 2022-10-09 JAX     HOU           1   -7    -340    44
-#>  6   2022     5 2022_05_L… 2022-10-09 CLE     LAC           0    2     115    47
-#>  7   2022     5 2022_05_M… 2022-10-09 NYJ     MIA           0    3.5   150    46
-#>  8   2022     5 2022_05_P… 2022-10-09 BUF     PIT           1  -14    -950    46
-#>  9   2022     5 2022_05_S… 2022-10-09 NO      SEA           1   -5.5  -235    46
-#> 10   2022     5 2022_05_T… 2022-10-09 WAS     TEN           0    1.5   110    43
-#> 11   2022     5 2022_05_S… 2022-10-09 CAR     SF            0    7     230    39
-#> 12   2022     5 2022_05_D… 2022-10-09 LA      DAL           1   -5.5  -235    43
-#> 13   2022     5 2022_05_P… 2022-10-09 ARI     PHI           0    5     190    49
-#> 14   2022     5 2022_05_C… 2022-10-09 BAL     CIN           1   -3.5  -175    48
-#> 15   2022     5 2022_05_L… 2022-10-10 KC      LV            1   -7    -340    51
-#> # … with abbreviated variable names ¹​home_team, ²​away_team
-```
