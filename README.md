@@ -8,6 +8,7 @@
 [![Dependencies](https://img.shields.io/badge/dependencies-7/26-orange?style=flat)](#)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
+[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 <div align="left">
